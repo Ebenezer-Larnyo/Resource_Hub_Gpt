@@ -1,0 +1,34 @@
+name: Check approved resource links
+on:
+  schedule:
+    - cron: "23 14 * * 1"
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: resource-link-check
+  cancel-in-progress: false
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run metadata-only monitor
+        run: python crawler/crawler.py
+      - name: Commit review queue if changed
+        run: |
+          if git diff --quiet -- crawler/review_queue.json; then
+            echo "Review queue unchanged."
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add crawler/review_queue.json
+            git commit -m "Update resource link review queue"
+            git push
+          fi
