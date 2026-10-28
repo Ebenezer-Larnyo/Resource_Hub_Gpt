@@ -1,0 +1,25 @@
+{
+  "description": "Only check approved public landing pages. Review each site’s terms, robots policy and rate limits before use.",
+  "sources": [
+    {
+      "url": "https://www.cdc.gov/autism/",
+      "publisher": "US Centers for Disease Control and Prevention",
+      "category": "Getting started"
+    },
+    {
+      "url": "https://autisticadvocacy.org/",
+      "publisher": "Autistic Self Advocacy Network",
+      "category": "Community"
+    },
+    {
+      "url": "https://www.parentcenterhub.org/",
+      "publisher": "Center for Parent Information and Resources",
+      "category": "Caregivers"
+    },
+    {
+      "url": "https://medlineplus.gov/autismspectrumdisorder.html",
+      "publisher": "MedlinePlus",
+      "category": "Health information"
+    }
+  ]
+}
